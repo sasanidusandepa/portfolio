@@ -7,11 +7,11 @@ import { defineConfig } from "astro/config";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import icon from "astro-icon";
-import { SITE_URL,LANGUAGES } from "./src/config";
+import { SITE_URL,LANGUAGES, BASE_PATH } from "./src/config";
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  base: "portfolio",
+  base: BASE_PATH,
   trailingSlash: "never",
   prefetch: {
     prefetchAll: true,

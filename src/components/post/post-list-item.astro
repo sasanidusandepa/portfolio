@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import DateTag from "../date-tag.astro";
 import Tag from "../tag.astro";
 import { CollectionType } from "../../types";
+import { BASE_PATH } from "../../config";
 type Props = {
   post: CollectionEntry<CollectionType.Blog>;
 };
@@ -17,7 +18,7 @@ const [lang, ...slug] = post.slug.split("/");
 <div class="flex flex-col gap-4 rounded-lg p-4 ring-0 cursor-pointer bg-zinc-800/60">
   {
     post.slug && (
-      <a href={`/${lang}/posts/${slug.join("/")}`} target="_self">
+      <a href={`/${BASE_PATH}/${lang}/posts/${slug.join("/")}`} target="_self">
         <img src={coverSrc} alt="cover" class="w-full aspect-video rounded-lg self-auto object-cover" />
       </a>
     )
@@ -27,10 +28,10 @@ const [lang, ...slug] = post.slug.split("/");
       <DateTag date={post.data.date} />
       {post.data.tags?.map((tag: string) => <Tag tag={tag} />)}
     </div>
-    <a href={`/${lang}/posts/${slug.join("/")}`} target="_self">
+    <a href={`/${BASE_PATH}/${lang}/posts/${slug.join("/")}`} target="_self">
       <h1 class="text-3xl font-title font-black text-white">{post.data.title}</h1>
     </a>
-    <a href={`/${lang}/posts/${slug.join("/")}`} target="_self">
+    <a href={`/${BASE_PATH}/${lang}/posts/${slug.join("/")}`} target="_self">
       <p class="text-sm text-gray-300">{post.data.description}</p>
     </a>
   </div>
