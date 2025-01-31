@@ -4,6 +4,7 @@ import Layout from "../../components/layout.astro";
 import PostListing from "../../components/post/post-list.astro";
 import SlugList from "../../components/slug-list.astro";
 import { CollectionType } from "../../types";
+import { BASE_PATH } from "../../config";
 
 type Post = CollectionEntry<CollectionType.Blog>;
 
@@ -39,6 +40,6 @@ const { slug, posts, years } = Astro.props;
 ---
 
 <Layout>
-  <SlugList slugs={years} activeSlug={slug} generateLink={(slug) => `/date/${encodeURI(slug)}`} />
+  <SlugList slugs={years} activeSlug={slug} generateLink={(slug) => `${BASE_PATH}/date/${encodeURI(slug)}`} />
   <PostListing posts={posts} />
 </Layout>

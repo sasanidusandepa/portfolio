@@ -1,4 +1,6 @@
 ---
+import { BASE_PATH } from '../config';
+
 type Props = {
   tag: string;
 };
@@ -7,7 +9,7 @@ const { tag } = Astro.props;
 ---
 
 <a
-  href={`/tags/${encodeURI(tag)}`}
+  href={`${BASE_PATH}/tags/${encodeURI(tag)}`}
   target="_self"
   class="px-2.5 py-1 rounded-lg text-xs text-red-600 font-medium bg-red-50/80 capitalize"
 >

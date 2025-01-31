@@ -2,11 +2,12 @@
 import Layout from "../../components/layout.astro";
 import PostListing from "../../components/post/post-list.astro";
 import SlugList from "../../components/slug-list.astro";
+import { BASE_PATH } from "../../config";
 
 import { posts, years } from "../../helpers";
 ---
 
 <Layout>
-  <SlugList slugs={years as string[]} generateLink={(slug: string) => `/date/${encodeURI(slug)}`} />
+  <SlugList slugs={years as string[]} generateLink={(slug: string) => `${BASE_PATH}/date/${encodeURI(slug)}`} />
   <PostListing posts={posts} />
 </Layout>
