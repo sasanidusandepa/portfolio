@@ -1,0 +1,73 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../../components/layout.astro";
+import Tag from "../../../components/tag.astro";
+import Slogan from "../../../components/slogan.astro";
+
+// MDX Components
+import DateTag from "../../../components/date-tag.astro";
+import PostContent from "../../../components/post/post-content.astro";
+import { CollectionType } from "../../../types";
+
+type Post = CollectionEntry<CollectionType.Blog>;
+export async function getStaticPaths() {
+  const posts = await getCollection(CollectionType.Blog);
+  return posts.map((post) => {
+    const [lang, ...slug] = post.slug.split("/");
+    return {
+      params: { lang, slug: slug.join("/") || undefined },
+      props: { post },
+    };
+  });
+}
+
+type Props = {
+  post: Post;
+};
+
+const { post } = Astro.props;
+
+const cover = post.data.cover ?? "";
+const isCoverObject = typeof cover === "object" && cover?.src;
+const coverSrc = isCoverObject ? `${cover.src}` : `${cover}`;
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <div class="flex flex-col gap-8 md:w-5/6 px-4 py-12 sm:px-8 mx-auto">
+    <div class="flex flex-col gap-6 items-center justify-center max-w-screen-sm mx-auto">
+      <h1 id="header" class="text-5xl text-center font-title font-black text-white">{post.data.title}</h1>
+      <div class="flex items-center justify-center gap-2">
+        <DateTag date={post.data.date} />
+        {post.data.tags?.map((tag) => <Tag tag={tag} />)}
+      </div>
+      <p class="text-lg text-center text-white max-w-[576px]">{post.data.description}</p>
+    </div>
+    {coverSrc && <img src={coverSrc} alt={post.data.title} class="w-full max-w-screen-md mx-auto rounded-lg" />}
+  </div>
+  <div
+    class="relative flex flex-col gap-3 max-w-screen-md mx-auto px-4 sm:px-6 text-xl leading-relaxed text-white bg-neutral-900/90 rounded-lg"
+  >
+    <PostContent post={post} />
+  </div>
+  <Slogan atBottom />
+</Layout>
+
+<script>
+  import { annotate, annotationGroup } from "rough-notation";
+  const notions = document.querySelectorAll("span[data-notion-identity]");
+  const annotations = new Array(notions.length).fill(0).map((_, index) => {
+    const node = notions[index] as HTMLSpanElement;
+    const type = node.dataset.notionType;
+    const color = node.dataset.notionColor;
+    const strokeWidth = node.dataset.notionStrokewidth;
+    return annotate(node, {
+      type: (type as "underline") ?? "underline",
+      color: color ?? "red",
+      animate: false,
+      multiline: type === "bracket" ? false : true,
+      brackets: ["left", "right"],
+      strokeWidth: Number(strokeWidth) ?? 1.5,
+    });
+  });
+  annotationGroup(annotations).show();
+</script>

@@ -1,0 +1,35 @@
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  content-visibility: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+*:focus-visible {
+  outline: none;
+}
+ 
+
+code {
+  @apply text-sm font-mono text-orange-500 font-medium p-1 bg-zinc-800/60 rounded-md;
+}
+
+ul,
+ol,
+menu {
+  @apply list-disc ml-6 my-3;
+}
+
+li {
+  @apply mb-2;
+}
+
+
+pre.astro-code {
+  @apply px-4 py-3 rounded-lg text-xl !bg-zinc-800/60 leading-6 overflow-x-scroll;
+}
+
+svg.rough-annotation {
+  opacity: 70%;
+}
