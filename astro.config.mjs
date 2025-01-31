@@ -11,6 +11,7 @@ import { SITE_URL,LANGUAGES } from "./src/config";
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
+  base: "portfolio",
   trailingSlash: "never",
   prefetch: {
     prefetchAll: true,

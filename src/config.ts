@@ -3,7 +3,7 @@
 export const SITE_FAVICON = "/favicon.png";
 export const SITE_LOGO = "/leo.png";
 export const SITE_TITLE = "LEO";
-export const SITE_URL = "https://astro-theme-leo.muji.dev";
+export const SITE_URL = "https://sasanidusandepa.github.io";
 export const SITE_DESCRIPTION =
   `
   This is a space where creativity meets logic. As a passionate frontend engineer and dreamer inspired by the vastness of space, Leo shares insights on cutting-edge web development, personal projects, and the exploration of new technologies. With a unique blend of technical expertise and a love for innovation, this blog is a journey into problem-solving, design, and the limitless possibilities of the digital universe.
