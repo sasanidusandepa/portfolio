@@ -44,7 +44,7 @@ const StarBackground: React.FC = () => {
 
     // load texture
     const textureLoader = new THREE.TextureLoader();
-    const dotTexture = textureLoader.load("/dot.svg");
+    const dotTexture = textureLoader.load("/portfolio/dot.svg");
 
     // create particles
     const particlesGeometry = new THREE.BufferGeometry();

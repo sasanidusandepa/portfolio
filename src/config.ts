@@ -1,7 +1,7 @@
 
 
-export const SITE_FAVICON = "/favicon.png";
-export const SITE_LOGO = "/leo.png";
+export const SITE_FAVICON = "/portfolio/favicon.png";
+export const SITE_LOGO = "/portfolio/leo.png";
 export const SITE_TITLE = "LEO";
 export const SITE_URL = "https://sasanidusandepa.github.io";
 export const BASE_PATH = "portfolio";
@@ -9,18 +9,18 @@ export const SITE_DESCRIPTION =
   `
   This is a space where creativity meets logic. As a passionate frontend engineer and dreamer inspired by the vastness of space, Leo shares insights on cutting-edge web development, personal projects, and the exploration of new technologies. With a unique blend of technical expertise and a love for innovation, this blog is a journey into problem-solving, design, and the limitless possibilities of the digital universe.
 `;
-export const ME_AVATAR = "/leo.png";
+export const ME_AVATAR = "/portfolio/leo.png";
 export const LANGUAGES = ['en', 'zh'];
 
 export const MENUS = [
   {
     title: "About Me",
-    link: "/me",
+    link: "/portfolio/me",
     target: "_self",
   },
   {
     title: "Posts",
-    link: "/en/posts",
+    link: "/portfolio/en/posts",
     target: "_self",
   },
   {
