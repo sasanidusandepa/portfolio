@@ -5,9 +5,40 @@ description: "ESP32-Based Fuel Level Monitoring System
 
 This system is designed to measure and display fuel levels using an ESP32 microcontroller. The setup includes an ultrasonic sensor to measure fuel height, an OLED display for real-time readings, and a mobile interface for remote monitoring. "
 tags: ["Arduino"]
-cover: "./2023_02_07_12_46_IMG_1758"
+cover: "./2023_02_07_12_46_IMG_1758.jpg"
 ---
+#Introduction
+##what is the ESP32 Fuel Level Monitoring System?
 
-# what is the ESP32 Fuel Level Monitoring System?
 
-###The ESP32 Fuel Level Measuring System is an IoT-based solution that measures and monitors the fuel level in a tank using an HC-SR04 ultrasonic sensor. It displays the real-time fuel percentage on an OLED display and sends the data to a Blynk mobile app for remote monitoring.config --
+#Conclusion
+The ESP32 Fuel Level Measuring System is an IoT-based solution that measures and monitors the fuel level in a tank using an HC-SR04 ultrasonic sensor. It displays the real-time fuel percentage on an OLED display and sends the data to a Blynk mobile app for remote monitoring.config --
+
+How It Works
+Ultrasonic Sensor Measurement
+
+The HC-SR04 ultrasonic sensor emits an ultrasonic pulse that bounces off the fuel surface and returns.
+The time taken for the pulse to return is converted into a distance measurement (fuel height).
+Fuel Level Calculation
+
+The measured distance is subtracted from the total tank height to determine the fuel level.
+The fuel percentage is calculated using:
+Fuel Percentage
+=
+(
+Tank Height
+−
+Measured Distance
+Tank Height
+)
+×
+100
+Fuel Percentage=( 
+Tank Height
+Tank Height−Measured Distance
+​
+ )×100
+Display and Data Transmission
+
+The OLED screen displays the fuel percentage locally.
+The ESP32 sends the data to the Blynk cloud, where the fuel level is displayed on a mobile app.
