@@ -1,34 +1,33 @@
 ---
 title: "Line-Following robot"
 date: "2025-01-31"
-description: "## Line-Following robot I built at the Arthur C. Clarke Institute for Advanced Technology (ACCIMT) ."
+description: "Line-Following robot I built at the Arthur C. Clarke Institute for Advanced Technology (ACCIMT) ."
 tags: ["networking"]
 cover: "./11.JPG"
 ---
 
-# Introduction
+# 💁🏽‍♂️Introduction
 Line-Following Robot 
 
 A line-following robot is an autonomous robot designed to move along a predefined path, typically a black line on a white surface or vice versa. It uses infrared (IR) sensors to detect the line and adjusts its movement accordingly. These robots are commonly used in industrial automation, material handling, robotic competitions, and smart transportation systems.
 
-Working Principle
-The robot follows a black line on a white surface using IR sensors. The working mechanism is as follows:
+
+
+📤Working Principle
+The robot follows a black line on a white surface using IR sensors. The working mechanism is as follows
 
 IR Sensor Detection: The IR sensors emit infrared light and detect its reflection. A black surface absorbs light, while a white surface reflects it.
 
 Microcontroller Processing: The Arduino Uno reads the sensor values and determines the movement.
 
-Motor Driver Control: The L298N motor driver adjusts the motor speed and direction based on sensor feedback.
+Motor Driver Control The L298N motor driver adjusts the motor speed and direction based on sensor feedback.
 
 
-Decision Making
 
+📤Decision Making
 If both sensors detect the line, the robot moves forward.
-
 If the left sensor moves off the line, the robot turns left.
-
 If the right sensor moves off the line, the robot turns right.
-
 If both sensors lose the line, the robot stops or adjusts.
 
 
@@ -36,26 +35,26 @@ If both sensors lose the line, the robot stops or adjusts.
 🛑Components Used
 
 Arduino Uno (Microcontroller)
-
 L298N Motor Driver (Motor control)
-
 IR Sensors (TCRT5000 or similar) (Line detection)
 
-DC Motors (For movement)
+☑️DC Motors (For movement)
 
-Wheels (Attached to motors)
+☑️Wheels (Attached to motors)
 
-Chassis (Base structure)
+☑️Chassis (Base structure)
 
-Battery Pack (Li-ion or AA batteries) (Power supply)
+☑️Battery Pack (Li-ion or AA batteries) (Power supply)
 
-Switch (For turning on/off)
+☑️Switch (For turning on/off)
 
-Connecting Wires (For circuit connections)
+☑️Connecting Wires (For circuit connections)
 
 
 
-Arduino Code for Line-Following Robot
+
+🔴Arduino Code for Line-Following Robot
+
 ```
 #define sensorLeft 2
 #define sensorRight 3
@@ -140,7 +139,8 @@ turnRight() Stops right motor and moves left motor.
 stopMotors() Stops all movement.
 
 
-Enhancements & Future Improvements
+
+📢 Enhancements & Future Improvements
 
 PID Control Improves stability and smooth turning.
 
