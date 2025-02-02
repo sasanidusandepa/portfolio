@@ -1,0 +1,259 @@
+---
+title: "DIY Drone Project"
+date: "2023-05-12"
+description: "1️⃣ Project Description
+This project is a self-stabilizing quadcopter drone using an ESP32 microcontroller as the flight controller. The drone is controlled via a 2.4GHz NRF24L01 radio module connected to a remote transmitter. The MPU6050 gyroscope and accelerometer provide stability, while PID control ensures smooth flight adjustments.
+
+The drone receives throttle, roll, pitch, and yaw signals from the remote, processes sensor data, and adjusts the brushless motor speeds (via ESCs) accordingly.
+
+"
+tags: ["Arduino"]
+cover: "./2.JPG"
+---
+# Introduction
+### Hardware Components & Their Purpose
+ESP32 – Serves as the main flight controller, handling sensor data processing and motor control.
+
+MPU6050 – A gyroscope and accelerometer module used for stabilization and orientation tracking.
+
+NRF24L01 – A wireless communication module that allows data transmission between the drone and remote controller.
+
+Brushless Motors (e.g., 2205 2300KV) – Provides thrust for the drone’s movement and stability.
+
+Electronic Speed Controllers (ESCs) – Controls the speed of each brushless motor based on input from the flight controller.
+
+LiPo Battery (3S or 4S, 1500mAh-2200mAh) – Powers the drone’s electronics and motors.
+
+Power Distribution Board (PDB) – Distributes power efficiently from the battery to the ESCs and flight controller.
+
+Drone Frame (Carbon Fiber/Plastic) – Provides structural support and holds all components together.
+
+RC Transmitter & Receiver (FlySky i6 or NRF24L01-based) – Sends throttle, roll, pitch, and yaw signals from the controller to the drone.
+
+
+3️⃣ How It Works
+
+🔹 Remote Control System
+
+The remote transmitter (ESP32 + NRF24L01) reads joystick inputs (throttle, pitch, roll, yaw) and sends the data wirelessly.
+
+The drone's ESP32 receives the data via another NRF24L01 module.
+
+🔹 Flight Control System
+
+The MPU6050 gyroscope & accelerometer measure orientation and movement.
+
+PID control algorithm adjusts motor speeds based on sensor data to maintain balance.
+
+🔹 Motor & ESC Control
+
+The ESP32 sends PWM signals to the ESCs, which adjust the motor speeds.
+
+The four motors respond to throttle, pitch, roll, and yaw inputs from the remote.
+
+
+
+4️⃣ Software Implementation
+
+🔹 Key Features in the Code
+
+✔ Remote-controlled flight using NRF24L01
+
+✔ Real-time PID stabilization for smooth flight
+
+✔ Sensor-based auto-leveling using MPU6050
+
+✔ PWM-based motor speed control
+
+✔ Throttle, pitch, roll, and yaw adjustments
+
+
+
+🔹 Code Breakdown
+
+1️⃣ Remote Control Code (ESP32 Transmitter)
+
+Reads joystick inputs (analog values).
+
+Converts them into throttle, roll, pitch, and yaw signals.
+
+
+Sends the data to the drone via NRF24L01.
+
+
+2️⃣ Flight Controller Code (ESP32 on Drone)
+
+Receives control data from the remote.
+
+Reads MPU6050 sensor data for stabilization.
+
+Uses PID control to adjust motor speeds.
+
+Sends PWM signals to ESCs to control the motors.
+
+
+## Full Code for ESP32 Flight Controller
+
+```
+#include <Wire.h>
+#include <MPU6050.h>
+#include <RF24.h>
+
+// MPU6050 Sensor
+MPU6050 mpu;
+
+// NRF24L01 Radio
+RF24 radio(4, 5);  // CE, CSN
+const byte address[6] = "00001";
+
+// PID Variables
+float Kp = 1.0, Ki = 0.05, Kd = 0.1;
+float error, last_error, integral, derivative;
+float setpoint = 0, output;
+
+// Motor Pins (PWM output to ESCs)
+int motor1 = 25, motor2 = 26, motor3 = 27, motor4 = 14;
+
+// RC Data
+int throttle = 1000, roll = 0, pitch = 0, yaw = 0;
+
+void setup() {
+    Serial.begin(115200);
+    
+    // Initialize MPU6050
+    Wire.begin();
+    mpu.initialize();
+
+    // NRF24L01 Setup
+    radio.begin();
+    radio.openReadingPipe(0, address);
+    radio.setPALevel(RF24_PA_LOW);
+    radio.startListening();
+
+    // Motor Setup
+    pinMode(motor1, OUTPUT);
+    pinMode(motor2, OUTPUT);
+    pinMode(motor3, OUTPUT);
+    pinMode(motor4, OUTPUT);
+}
+
+void loop() {
+    int ax, ay, az, gx, gy, gz;
+    mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+
+    // Read Remote Control Data
+    if (radio.available()) {
+        int data[4];
+        radio.read(&data, sizeof(data));
+        throttle = data[0];
+        roll = data[1];
+        pitch = data[2];
+        yaw = data[3];
+    }
+
+    // PID Stabilization (Pitch Control)
+    error = pitch - (gx / 131.0);
+    integral += error;
+    derivative = error - last_error;
+    output = Kp * error + Ki * integral + Kd * derivative;
+    last_error = error;
+
+    // Motor Speed Calculation
+    int m1_speed = throttle + output - yaw;
+    int m2_speed = throttle - output + yaw;
+    int m3_speed = throttle + output + yaw;
+    int m4_speed = throttle - output - yaw;
+
+    // Constrain motor speeds
+    m1_speed = constrain(m1_speed, 1000, 2000);
+    m2_speed = constrain(m2_speed, 1000, 2000);
+    m3_speed = constrain(m3_speed, 1000, 2000);
+    m4_speed = constrain(m4_speed, 1000, 2000);
+
+    // Send PWM signals to ESCs
+    analogWrite(motor1, m1_speed);
+    analogWrite(motor2, m2_speed);
+    analogWrite(motor3, m3_speed);
+    analogWrite(motor4, m4_speed);
+
+    Serial.print("Throttle: "); Serial.println(throttle);
+    Serial.print("Pitch: "); Serial.println(pitch);
+    Serial.print("Yaw: "); Serial.println(yaw);
+    delay(10);
+}
+
+```
+
+## ESP32 & NRF24L01 Remote Control Transmitter Code
+```
+#include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
+
+// NRF24L01 radio configuration
+#define CE_PIN 4
+#define CSN_PIN 5
+RF24 radio(CE_PIN, CSN_PIN);
+const byte address[6] = "00001"; // Address for communication
+
+// Joystick input pins
+#define THROTTLE_PIN 34
+#define YAW_PIN 35
+#define PITCH_PIN 32
+#define ROLL_PIN 33
+
+// Data structure for sending control signals
+struct DroneData {
+  int throttle;
+  int yaw;
+  int pitch;
+  int roll;
+};
+
+DroneData data; // Create a data object
+
+void setup() {
+  Serial.begin(115200);
+
+  // Initialize joystick input pins
+  pinMode(THROTTLE_PIN, INPUT);
+  pinMode(YAW_PIN, INPUT);
+  pinMode(PITCH_PIN, INPUT);
+  pinMode(ROLL_PIN, INPUT);
+
+  // Initialize NRF24L01 module
+  if (!radio.begin()) {
+    Serial.println("NRF24L01 initialization failed!");
+    while (1);
+  }
+
+  radio.openWritingPipe(address);  // Set the address to send data
+  radio.setPALevel(RF24_PA_HIGH);  // Power level (adjust if needed)
+  radio.stopListening();           // Set as transmitter
+}
+
+void loop() {
+  // Read analog joystick values (0-4095 for ESP32 ADC)
+  data.throttle = analogRead(THROTTLE_PIN) / 16;  // Scale to 0-255
+  data.yaw = analogRead(YAW_PIN) / 16;
+  data.pitch = analogRead(PITCH_PIN) / 16;
+  data.roll = analogRead(ROLL_PIN) / 16;
+
+  // Send data structure wirelessly
+  bool success = radio.write(&data, sizeof(data));
+
+  // Debug output
+  Serial.print("Throttle: "); Serial.print(data.throttle);
+  Serial.print(" | Yaw: "); Serial.print(data.yaw);
+  Serial.print(" | Pitch: "); Serial.print(data.pitch);
+  Serial.print(" | Roll: "); Serial.println(data.roll);
+
+  if (success) {
+    Serial.println("Data sent successfully!");
+  } else {
+    Serial.println("Data transmission failed!");
+  }
+
+  delay(50); // Adjust delay for responsiveness
+}
+```
