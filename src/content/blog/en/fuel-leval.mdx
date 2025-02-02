@@ -29,3 +29,106 @@ Display and Data Transmission
 
 The OLED screen displays the fuel percentage locally.
 The ESP32 sends the data to the Blynk cloud, where the fuel level is displayed on a mobile app.
+
+## code 
+
+```
+#define BLYNK_PRINT Serial
+#include <WiFi.h>
+#include <BlynkSimpleEsp32.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <NewPing.h>
+
+// OLED display settings
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET    -1
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+// Ultrasonic sensor pins
+#define TRIGGER_PIN 5
+#define ECHO_PIN 18
+#define MAX_DISTANCE 200
+NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+
+// Blynk credentials (replace with your WiFi and Blynk auth token)
+char auth[] = "Your_Blynk_Auth_Token";
+char ssid[] = "Your_WiFi_Name";
+char pass[] = "Your_WiFi_Password";
+
+// Tank dimensions (adjust according to your fuel tank)
+const float TANK_HEIGHT_CM = 30.0;  // Tank height in cm
+
+void setup() {
+    Serial.begin(115200);
+    Blynk.begin(auth, ssid, pass);
+
+    // Initialize OLED display
+    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+        Serial.println(F("SSD1306 allocation failed"));
+        for (;;);
+    }
+
+    display.clearDisplay();
+    display.setTextSize(1);
+    display.setTextColor(WHITE);
+    display.setCursor(0, 10);
+    display.println("Fuel Monitor Init...");
+    display.display();
+    delay(2000);
+}
+
+void loop() {
+    Blynk.run();
+    
+    // Measure fuel level
+    float distance = sonar.ping_cm();
+    if (distance == 0) distance = MAX_DISTANCE;  // If out of range, assume empty
+
+    // Convert to fuel percentage
+    float fuelLevel = TANK_HEIGHT_CM - distance;
+    float fuelPercentage = (fuelLevel / TANK_HEIGHT_CM) * 100.0;
+
+    // Ensure values are within range
+    if (fuelPercentage > 100) fuelPercentage = 100;
+    if (fuelPercentage < 0) fuelPercentage = 0;
+
+    // Display on OLED
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setCursor(20, 10);
+    display.print("Fuel: ");
+    display.print((int)fuelPercentage);
+    display.print("%");
+    display.display();
+
+    // Send data to Blynk (Virtual Pin V0)
+    Blynk.virtualWrite(V0, fuelPercentage);
+
+    // Print to Serial Monitor
+    Serial.print("Fuel Level: ");
+    Serial.print(fuelPercentage);
+    Serial.println("%");
+
+    delay(2000);  // Update every 2 seconds
+}
+```
+## :diamonds: Features & Benefits
+:white_check_mark: Real-Time Monitoring – Displays fuel level on OLED and mobile app.
+:white_check_mark: Remote Access – View fuel percentage from anywhere using Blynk.
+:white_check_mark: WiFi Connectivity – Wireless data transmission using ESP32.
+:white_check_mark: Low-Cost & Efficient – Uses inexpensive, easy-to-use components.
+:white_check_mark: IoT Expansion – Can send alerts (e.g., low fuel warning) via email or SMS.
+
+## Applications
+:ballot_box_with_check: Vehicle Fuel Monitoring – Track fuel levels in cars, trucks, or fleets.
+:ballot_box_with_check: Industrial Fuel Tanks – Monitor fuel usage in factories or power generators.
+:ballot_box_with_check: Home Diesel Tanks – Check heating oil or generator fuel remotely.
+:ballot_box_with_check: Smart Farming – Monitor fuel storage for farm equipment.
+
+## Future Enhancements
+:snowflake: Cloud Data Logging – Store fuel level history for trend analysis.
+:snowflake: Battery Backup – Ensure continuous operation during power failure.
+:snowflake: Mobile Notifications – Alert users when fuel is low.
+:snowflake: Multiple Sensors – Monitor multiple tanks from one system.
