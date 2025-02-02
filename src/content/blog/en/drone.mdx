@@ -31,25 +31,24 @@ Drone Frame (Carbon Fiber/Plastic) – Provides structural support and holds all
 RC Transmitter & Receiver (FlySky i6 or NRF24L01-based) – Sends throttle, roll, pitch, and yaw signals from the controller to the drone.
 
 
+
 3️⃣ How It Works
 
 🔹 Remote Control System
 
 The remote transmitter (ESP32 + NRF24L01) reads joystick inputs (throttle, pitch, roll, yaw) and sends the data wirelessly.
-
 The drone's ESP32 receives the data via another NRF24L01 module.
 
 🔹 Flight Control System
 
 The MPU6050 gyroscope & accelerometer measure orientation and movement.
-
 PID control algorithm adjusts motor speeds based on sensor data to maintain balance.
 
 🔹 Motor & ESC Control
 
 The ESP32 sends PWM signals to the ESCs, which adjust the motor speeds.
-
 The four motors respond to throttle, pitch, roll, and yaw inputs from the remote.
+
 
 
 
@@ -69,7 +68,9 @@ The four motors respond to throttle, pitch, roll, and yaw inputs from the remote
 
 
 
+
 🔹 Code Breakdown
+
 
 1️⃣ Remote Control Code (ESP32 Transmitter)
 
@@ -77,8 +78,8 @@ Reads joystick inputs (analog values).
 
 Converts them into throttle, roll, pitch, and yaw signals.
 
-
 Sends the data to the drone via NRF24L01.
+
 
 
 2️⃣ Flight Controller Code (ESP32 on Drone)
@@ -262,48 +263,69 @@ void loop() {
 3️⃣ How It Works
 
 🔹 Remote Control System
-The remote transmitter (ESP32 + NRF24L01) reads joystick inputs (throttle, pitch, roll, yaw) and sends the data wirelessly.
-The drone's ESP32 receives the data via another NRF24L01 module.
+The remote transmitter (ESP32 + NRF24L01) reads joystick inputs (throttle, pitch, roll, yaw) and sends the data wirelessly.The drone's ESP32 receives the data via another NRF24L01 module.
 
 🔹 Flight Control System
-The MPU6050 gyroscope & accelerometer measure orientation and movement.
-PID control algorithm adjusts motor speeds based on sensor data to maintain balance.
+The MPU6050 gyroscope & accelerometer measure orientation and movement. PID control algorithm adjusts motor speeds based on sensor data to maintain balance.
 
 🔹 Motor & ESC Control
-The ESP32 sends PWM signals to the ESCs, which adjust the motor speeds.
-The four motors respond to throttle, pitch, roll, and yaw inputs from the remote.
+The ESP32 sends PWM signals to the ESCs, which adjust the motor speeds. The four motors respond to throttle, pitch, roll, and yaw inputs from the remote.
+
 
 
 4️⃣ Software Implementation
 
 🔹 Key Features in the Code
+
 ✔ Remote-controlled flight using NRF24L01
+
 ✔ Real-time PID stabilization for smooth flight
+
 ✔ Sensor-based auto-leveling using MPU6050
+
 ✔ PWM-based motor speed control
+
 ✔ Throttle, pitch, roll, and yaw adjustments
+
+
+
+
 
 🔹 Code Breakdown
 Remote Control Code (ESP32 Transmitter)
 
 Reads joystick inputs (analog values).
+
 Converts them into throttle, roll, pitch, and yaw signals.
+
 Sends the data to the drone via NRF24L01.
+
 Flight Controller Code (ESP32 on Drone)
 
+
+
 Receives control data from the remote.
+
 Reads MPU6050 sensor data for stabilization.
+
 Uses PID control to adjust motor speeds.
+
 Sends PWM signals to ESCs to control the motors.
 
 
+
+
 5️⃣ Flight Control Algorithm (PID Tuning)
-The PID controller is essential for stability. It adjusts motor speeds based on:
+The PID controller is essential for stability. It adjusts motor speeds based on
+
 🔹 Proportional (P) – Corrects current error.
+
 🔹 Integral (I) – Fixes accumulated errors over time.
+
 🔹 Derivative (D) – Predicts future errors for smoother control.
 
 🔹 Example PID Control for Pitch
+
 cpp
 Copy
 Edit
@@ -318,31 +340,60 @@ This output corrects the drone’s balance dynamically.
 
 
 6️⃣ Challenges & Improvements
+
 🚧 Challenges Faced
+
 ✔ Fine-tuning PID values for stable flight.
+
 ✔ Ensuring smooth communication between the drone and remote.
+
 ✔ Power management (correct LiPo selection).
 
+
+
 🔧 Future Enhancements
+
 ✔ Add GPS for auto-navigation.
+
 ✔ Integrate FPV (First-Person View) Camera for live streaming.
+
 ✔ Implement altitude hold and autonomous flight modes.
 
 
+
 7️⃣ Summary
+
 ✅ ESP32-powered quadcopter with remote control
+
 ✅ Uses MPU6050 for stability & NRF24L01 for wireless control
+
 ✅ PID control ensures smooth flight and responsiveness
+
 ✅ Great platform for learning drone programming & control systems
 
+
+
+
 🛠️ Final Steps
+
 ✅ Upload the ESP32 flight controller code on the drone’s ESP32
+
 ✅ Upload the NRF24L01 transmitter code on another ESP32/Arduino
+
 ✅ Calibrate ESCs, accelerometer, and gyro
+
 ✅ Test radio control and adjust PID values
 
+
+
+
 🔥 What This Code Does
+
 ✔ Reads joystick (RC) input from NRF24L01
+
 ✔ Processes MPU6050 (gyroscope & accelerometer) data
+
 ✔ Applies PID control for stability
+
 ✔ Controls brushless motors via PWM
+
