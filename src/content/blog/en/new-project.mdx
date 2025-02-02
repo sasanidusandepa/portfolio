@@ -1,15 +1,157 @@
 ---
-title: "New Project"
+title: "Line-Following robot"
 date: "2025-01-31"
-description: "This is a new project."
+description: "## Line-Following robot I built at the Arthur C. Clarke Institute for Advanced Technology (ACCIMT) ."
 tags: ["networking"]
-cover: "./img.png"
+cover: "./11.JPG"
 ---
 
 # Introduction
-lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.
+Line-Following Robot 
 
-lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.
+A line-following robot is an autonomous robot designed to move along a predefined path, typically a black line on a white surface or vice versa. It uses infrared (IR) sensors to detect the line and adjusts its movement accordingly. These robots are commonly used in industrial automation, material handling, robotic competitions, and smart transportation systems.
 
-# Conclusion
-lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.
+Working Principle
+The robot follows a black line on a white surface using IR sensors. The working mechanism is as follows:
+
+IR Sensor Detection: The IR sensors emit infrared light and detect its reflection. A black surface absorbs light, while a white surface reflects it.
+
+Microcontroller Processing: The Arduino Uno reads the sensor values and determines the movement.
+
+Motor Driver Control: The L298N motor driver adjusts the motor speed and direction based on sensor feedback.
+
+
+Decision Making
+
+If both sensors detect the line, the robot moves forward.
+
+If the left sensor moves off the line, the robot turns left.
+
+If the right sensor moves off the line, the robot turns right.
+
+If both sensors lose the line, the robot stops or adjusts.
+
+
+
+🛑Components Used
+
+Arduino Uno (Microcontroller)
+
+L298N Motor Driver (Motor control)
+
+IR Sensors (TCRT5000 or similar) (Line detection)
+
+DC Motors (For movement)
+
+Wheels (Attached to motors)
+
+Chassis (Base structure)
+
+Battery Pack (Li-ion or AA batteries) (Power supply)
+
+Switch (For turning on/off)
+
+Connecting Wires (For circuit connections)
+
+
+
+Arduino Code for Line-Following Robot
+```
+#define sensorLeft 2
+#define sensorRight 3
+#define motor1A 5
+#define motor1B 6
+#define motor2A 9
+#define motor2B 10
+
+void setup() {
+  pinMode(sensorLeft, INPUT);
+  pinMode(sensorRight, INPUT);
+  pinMode(motor1A, OUTPUT);
+  pinMode(motor1B, OUTPUT);
+  pinMode(motor2A, OUTPUT);
+  pinMode(motor2B, OUTPUT);
+}
+
+void loop() {
+  int leftValue = digitalRead(sensorLeft);
+  int rightValue = digitalRead(sensorRight);
+
+  if (leftValue == LOW && rightValue == LOW) {
+    moveForward(); // Move forward
+  } else if (leftValue == LOW && rightValue == HIGH) {
+    turnLeft(); // Turn left
+  } else if (leftValue == HIGH && rightValue == LOW) {
+    turnRight(); // Turn right
+  } else {
+    stopMotors(); // Stop movement
+  }
+}
+
+void moveForward() {
+  digitalWrite(motor1A, HIGH);
+  digitalWrite(motor1B, LOW);
+  digitalWrite(motor2A, HIGH);
+  digitalWrite(motor2B, LOW);
+}
+
+void turnLeft() {
+  digitalWrite(motor1A, LOW);
+  digitalWrite(motor1B, LOW);
+  digitalWrite(motor2A, HIGH);
+  digitalWrite(motor2B, LOW);
+}
+
+void turnRight() {
+  digitalWrite(motor1A, HIGH);
+  digitalWrite(motor1B, LOW);
+  digitalWrite(motor2A, LOW);
+  digitalWrite(motor2B, LOW);
+}
+
+void stopMotors() {
+  digitalWrite(motor1A, LOW);
+  digitalWrite(motor1B, LOW);
+  digitalWrite(motor2A, LOW);
+  digitalWrite(motor2B, LOW);
+}
+```
+
+
+
+🛑How the Code Works
+
+Defines Pins Assigns sensor and motor control pins.
+
+Setup Function Configures pins as input/output.
+
+Loop Function Reads the IR sensor values.
+
+Determines movement direction (forward, left, right, or stop).
+
+Motor Control Functions
+
+moveForward() Moves both motors forward.
+
+turnLeft() Stops left motor and moves right motor.
+
+turnRight() Stops right motor and moves left motor.
+
+stopMotors() Stops all movement.
+
+
+Enhancements & Future Improvements
+
+PID Control Improves stability and smooth turning.
+
+Speed Adjustment Using PWM signals for variable speed.
+
+Obstacle Avoidance Adding ultrasonic sensors to detect objects.
+
+Wireless Control Using Bluetooth/WiFi for remote operation.
+
+Path Learning Implementing AI for self-learning navigation.
+
+
+👉Conclusion
+This line-following robot effectively follows a black line using IR sensors and Arduino Uno. It can be improved for better accuracy, speed control, and obstacle detection. This project is an excellent starting point for robotics and automation enthusiasts.
