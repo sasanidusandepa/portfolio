@@ -31,6 +31,7 @@ Drone Frame (Carbon Fiber/Plastic) – Provides structural support and holds all
 RC Transmitter & Receiver (FlySky i6 or NRF24L01-based) – Sends throttle, roll, pitch, and yaw signals from the controller to the drone.
 
 
+---
 
 3️⃣ How It Works
 
@@ -49,7 +50,7 @@ PID control algorithm adjusts motor speeds based on sensor data to maintain bala
 The ESP32 sends PWM signals to the ESCs, which adjust the motor speeds.
 The four motors respond to throttle, pitch, roll, and yaw inputs from the remote.
 
-
+---
 
 
 4️⃣ Software Implementation
@@ -66,7 +67,7 @@ The four motors respond to throttle, pitch, roll, and yaw inputs from the remote
 
 ✔ Throttle, pitch, roll, and yaw adjustments
 
-
+---
 
 
 🔹 Code Breakdown
@@ -80,6 +81,7 @@ Converts them into throttle, roll, pitch, and yaw signals.
 
 Sends the data to the drone via NRF24L01.
 
+---
 
 
 2️⃣ Flight Controller Code (ESP32 on Drone)
@@ -92,6 +94,7 @@ Uses PID control to adjust motor speeds.
 
 Sends PWM signals to ESCs to control the motors.
 
+---
 
 ## Full Code for ESP32 Flight Controller
 
@@ -289,7 +292,7 @@ The ESP32 sends PWM signals to the ESCs, which adjust the motor speeds. The four
 
 
 
-
+---
 
 🔹 Code Breakdown
 Remote Control Code (ESP32 Transmitter)
@@ -313,7 +316,7 @@ Uses PID control to adjust motor speeds.
 Sends PWM signals to ESCs to control the motors.
 
 
-
+---
 
 5️⃣ Flight Control Algorithm (PID Tuning)
 The PID controller is essential for stability. It adjusts motor speeds based on
@@ -326,9 +329,8 @@ The PID controller is essential for stability. It adjusts motor speeds based on
 
 🔹 Example PID Control for Pitch
 
-cpp
-Copy
-Edit
+---
+
 ```
 error = pitch - (gx / 131.0);
 integral += error;

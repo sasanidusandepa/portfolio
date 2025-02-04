@@ -10,19 +10,19 @@ cover: "./123.jpg"
 
 ---
 
-## **Project Title:**  
+## **Project Title**  
 **Secure and Redundant Network Design for SYNTAX SOLUTIONS** 🔒🔄  
 
 ---
 
-## **Company Overview:**  
+## **Company Overview**  
 **SYNTAX SOLUTIONS** is a leading privately-owned software company headquartered in **Colombo**. The company has recently expanded by acquiring a **three-story building in Matara** 🏗️ with the goal of establishing a **state-of-the-art software development hub**. The Matara branch is expected to accommodate approximately **150 employees** across various departments.  
 
 ---
 
 ## **Network Design Requirements & Specifications**  
 
-### **Departmental Structure & User Distribution:**  
+### **Departmental Structure & User Distribution**  
 
 | **Department**         | **Number of Users** |  
 |-------------------------|---------------------|  
@@ -37,22 +37,22 @@ cover: "./123.jpg"
 
 ---
 
-### **Key Network Requirements:**  
+### **Key Network Requirements**  
 
-- **Subnet Isolation:** Each department must have its own unique subnet and should not communicate with other departments unless explicitly required. 🚧  
-- **IP Addressing:** The **192.168.10.0/24** network is assigned to all departments except the server room. DHCP will be used for IP allocation. 📡  
+- **Subnet Isolation** Each department must have its own unique subnet and should not communicate with other departments unless explicitly required. 🚧  
+- **IP Addressing** The **192.168.10.0/24** network is assigned to all departments except the server room. DHCP will be used for IP allocation. 📡  
 - **Server Room Subnet:** The number of required servers will be decided by the Network Architect, assigned from the **10.254.1.0/24** subnet (Static IPs). 💻  
-- **Enterprise Applications:** ERP and CRM systems must be implemented on local servers. 🖥️  
-- **Redundancy & Reliability:** High-level redundancy is necessary to prevent single points of failure and ensure smooth traffic flow. 🔄  
-- **Wireless Connectivity:** Sales & Marketing employees must have Wi-Fi access to internal network resources. 📶  
+- **Enterprise Applications** ERP and CRM systems must be implemented on local servers. 🖥️  
+- **Redundancy & Reliability** High-level redundancy is necessary to prevent single points of failure and ensure smooth traffic flow. 🔄  
+- **Wireless Connectivity** Sales & Marketing employees must have Wi-Fi access to internal network resources. 📶  
 - **Network Monitoring & Troubleshooting:** Proper monitoring and diagnostics tools must be implemented. 🛠️  
-- **Security Measures:** All possible network security mechanisms must be applied to prevent cyber threats. 🛡️  
+- **Security Measures** All possible network security mechanisms must be applied to prevent cyber threats. 🛡️  
 
 ---
 
 ## **Proposed Network Architecture & Topology**  
 
-### **1. Topology Design**  
+### **Topology Design**  
 The proposed network will utilize a **Hybrid Topology**, integrating elements of **Star** and **Mesh** Topologies for enhanced fault tolerance and load balancing. This topology provides:  
 - **Centralized control** with high efficiency. 🎯  
 - **Redundant paths** for improved reliability. 🔄  
@@ -60,7 +60,7 @@ The proposed network will utilize a **Hybrid Topology**, integrating elements of
 
 ---
 
-### **2. IP Addressing Plan**  
+### **IP Addressing Plan**  
 
 | **Department**         | **Subnet Allocation**   | **IP Assignment** |  
 |-------------------------|-------------------------|-------------------|  
@@ -73,20 +73,20 @@ The proposed network will utilize a **Hybrid Topology**, integrating elements of
 | Network Team            | 192.168.10.160/27       | DHCP              |  
 | Server Room             | 10.254.1.0/24           | Static            |  
 
-- **DHCP Implementation:** DHCP servers will be configured to allocate IPs dynamically for all departments. 📡  
-- **Static IP Allocation:** Reserved for servers, routers, switches, and critical devices. 💻  
+- **DHCP Implementation** DHCP servers will be configured to allocate IPs dynamically for all departments. 📡  
+- **Static IP Allocation** Reserved for servers, routers, switches, and critical devices. 💻  
 
----
+--- 
 
-### **3. Network Hardware & Infrastructure**  
+### **Network Hardware & Infrastructure**  
 
-**Core Networking Devices:**  
+**Core Networking Devices**  
 - **Cisco Layer 3 Managed Switches** 🖧  
 - **Enterprise-Grade Routers** 🌐  
 - **Wireless Access Points** (for Sales & Marketing) 📶  
 - **Redundant ISP Connectivity** 🔄  
 
-**Security & Monitoring:**  
+**Security & Monitoring**  
 - **Next-Generation Firewalls (NGFW)** 🔥  
 - **Intrusion Detection & Prevention Systems (IDPS)** 🚨  
 - **VPN for Remote Access** 🔒  
@@ -96,22 +96,22 @@ The proposed network will utilize a **Hybrid Topology**, integrating elements of
 
 ## **Implementation Strategy**  
 
-### **Phase 1: Infrastructure Setup**  
+### **Infrastructure Setup**  
 - Install and configure core network devices (Routers, Switches, Firewalls). 🛠️  
 - Deploy structured cabling for wired connections (Cat6 Ethernet & Fiber for backbone). 🖧  
 - Set up Wireless Access Points for Sales & Marketing team. 📶  
 
-### **Phase 2: Network Configuration**  
+### **Network Configuration**  
 - Implement VLAN segmentation for each department. 🚧  
 - Configure IP addressing & DHCP services. 📡  
 - Establish redundant network paths to eliminate bottlenecks. 🔄  
 
-### **Phase 3: Server & Security Deployment**  
+### **Server & Security Deployment**  
 - Install and configure ERP & CRM Servers in the server room. 🖥️  
 - Apply firewall rules & security policies. 🔥  
 - Set up Network Monitoring & Alert Systems. 🚨  
 
-### **Phase 4: Testing & Optimization**  
+### **Testing & Optimization**  
 - Conduct network performance tests. 🧪  
 - Apply QoS (Quality of Service) policies to prioritize critical applications. 🎯  
 - Document network topology, policies, and troubleshooting guides. 📄  
@@ -145,7 +145,7 @@ The proposed network will utilize a **Hybrid Topology**, integrating elements of
 
 ---
 
-## **Conclusion:**  
+## **Conclusion**  
 The proposed network design ensures a **high-performance, secure, and scalable environment** for SYNTAX SOLUTIONS' Matara branch. By implementing **redundancy, VLAN segmentation, and strong security mechanisms**, the network will support seamless operations while allowing future expansion. 🚀  
 
 --- 
