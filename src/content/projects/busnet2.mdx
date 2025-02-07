@@ -1,0 +1,165 @@
+---
+title: "Network Architecture for SYNTAX SOLUTIONS"
+date: "2023-05-15"
+description: "This project outlines the network infrastructure design for SYNTAX SOLUTIONS' new Matara branch, ensuring high performance, security, and scalability. The network is segmented into unique subnets for each department, with DHCP-assigned IPs for users and static IPs for servers. A secure and redundant topology is implemented to prevent single points of failure, while WiFi connectivity is provided for the Sales and Marketing team. Security measures include firewalls, VLANs, and monitoring tools for efficient network management. The design supports ERP and CRM systems, ensuring smooth business operations."
+tags: ["networking"]
+cover: "./123.jpg"
+---
+
+# 🌐 Network Architectural Design 🏢
+
+---
+
+## **Project Title**
+
+**Secure and Redundant Network Design for SYNTAX SOLUTIONS** 🔒🔄
+
+---
+
+## \*\*Company Overview
+
+**SYNTAX SOLUTIONS** is a leading privately-owned software company headquartered in **Colombo**. The company has recently expanded by acquiring a **three-story building in Matara** 🏗️ with the goal of establishing a **state-of-the-art software development hub**. The Matara branch is expected to accommodate approximately **150 employees** across various departments.
+
+---
+
+## **Network Design Requirements & Specifications**
+
+### **Departmental Structure & User Distribution**
+
+| **Department**       | **Number of Users**       |
+| -------------------- | ------------------------- |
+| Customer Support     | 10                        |
+| Sales & Marketing    | 20                        |
+| Finance              | 25                        |
+| Legal                | 5                         |
+| Human Resources (HR) | 10                        |
+| Software Developers  | 55                        |
+| Network Team         | 5                         |
+| Server Room          | Servers + ISP Connections |
+
+---
+
+### **Key Network Requirements**
+
+- **Subnet Isolation** Each department must have its own unique subnet and should not communicate with other departments unless explicitly required. 🚧
+- **IP Addressing** The **192.168.10.0/24** network is assigned to all departments except the server room. DHCP will be used for IP allocation. 📡
+- **Server Room Subnet:** The number of required servers will be decided by the Network Architect, assigned from the **10.254.1.0/24** subnet (Static IPs). 💻
+- **Enterprise Applications** ERP and CRM systems must be implemented on local servers. 🖥️
+- **Redundancy & Reliability** High-level redundancy is necessary to prevent single points of failure and ensure smooth traffic flow. 🔄
+- **Wireless Connectivity** Sales & Marketing employees must have Wi-Fi access to internal network resources. 📶
+- **Network Monitoring & Troubleshooting:** Proper monitoring and diagnostics tools must be implemented. 🛠️
+- **Security Measures** All possible network security mechanisms must be applied to prevent cyber threats. 🛡️
+
+---
+
+## **Proposed Network Architecture & Topology**
+
+### **Topology Design**
+
+The proposed network will utilize a **Hybrid Topology**, integrating elements of **Star** and **Mesh** Topologies for enhanced fault tolerance and load balancing. This topology provides:
+
+- **Centralized control** with high efficiency. 🎯
+- **Redundant paths** for improved reliability. 🔄
+- **Segmentation through VLANs** for security and better network management. 🚧
+
+---
+
+### **IP Addressing Plan**
+
+| **Department**    | **Subnet Allocation** | **IP Assignment** |
+| ----------------- | --------------------- | ----------------- |
+| Customer Support  | 192.168.10.0/26       | DHCP              |
+| Sales & Marketing | 192.168.10.64/26      | DHCP + WiFi       |
+| Finance           | 192.168.10.128/26     | DHCP              |
+| Legal             | 192.168.10.192/27     | DHCP              |
+| HR                | 192.168.10.224/27     | DHCP              |
+| Developers        | 192.168.10.96/25      | DHCP              |
+| Network Team      | 192.168.10.160/27     | DHCP              |
+| Server Room       | 10.254.1.0/24         | Static            |
+
+- **DHCP Implementation** DHCP servers will be configured to allocate IPs dynamically for all departments. 📡
+- **Static IP Allocation** Reserved for servers, routers, switches, and critical devices. 💻
+
+---
+
+### **Network Hardware & Infrastructure**
+
+**Core Networking Devices**
+
+- **Cisco Layer 3 Managed Switches** 🖧
+- **Enterprise-Grade Routers** 🌐
+- **Wireless Access Points** (for Sales & Marketing) 📶
+- **Redundant ISP Connectivity** 🔄
+
+**Security & Monitoring**
+
+- **Next-Generation Firewalls (NGFW)** 🔥
+- **Intrusion Detection & Prevention Systems (IDPS)** 🚨
+- **VPN for Remote Access** 🔒
+- **Security Information & Event Management (SIEM) System** 📊
+
+---
+
+## **Implementation Strategy**
+
+### **Infrastructure Setup**
+
+- Install and configure core network devices (Routers, Switches, Firewalls). 🛠️
+- Deploy structured cabling for wired connections (Cat6 Ethernet & Fiber for backbone). 🖧
+- Set up Wireless Access Points for Sales & Marketing team. 📶
+
+### **Network Configuration**
+
+- Implement VLAN segmentation for each department. 🚧
+- Configure IP addressing & DHCP services. 📡
+- Establish redundant network paths to eliminate bottlenecks. 🔄
+
+### **Server & Security Deployment**
+
+- Install and configure ERP & CRM Servers in the server room. 🖥️
+- Apply firewall rules & security policies. 🔥
+- Set up Network Monitoring & Alert Systems. 🚨
+
+### **Testing & Optimization**
+
+- Conduct network performance tests. 🧪
+- Apply QoS (Quality of Service) policies to prioritize critical applications. 🎯
+- Document network topology, policies, and troubleshooting guides. 📄
+
+---
+
+## **Security & Redundancy Measures**
+
+### **Security Implementations:**
+
+- ✔ **Firewall Rules** to restrict inter-department communication. 🔥
+- ✔ **Access Control Lists (ACLs)** for fine-grained control. 🛡️
+- ✔ **Intrusion Prevention System (IPS)** to detect threats. 🚨
+- ✔ **VPN** for secure remote access. 🔒
+- ✔ **Endpoint Security** on all workstations. 💻
+- ✔ **Periodic Security Audits & Patch Management.** 🔄
+
+### **Redundancy Solutions:**
+
+- ✔ **Dual ISP Connections** for high availability. 🌐
+- ✔ **Backup Power Supplies** (UPS + Generators). 🔋
+- ✔ **Link Aggregation** for high-speed interconnectivity. 🖧
+- ✔ **Failover Configurations** for seamless switching. 🔄
+- ✔ **Data Backup Solutions** (Cloud + On-Premise). ☁️
+
+---
+
+## **Final Recommendations & Future Expansion**
+
+- Implement **cloud-based backups** for ERP/CRM to prevent data loss. ☁️
+- Deploy **AI-driven network monitoring** for predictive analysis. 🤖
+- Plan for **network scalability** to accommodate future employees. 📈
+- Regularly update **security policies** to align with new threats. 🔄
+
+---
+
+## **Conclusion**
+
+The proposed network design ensures a **high-performance, secure, and scalable environment** for SYNTAX SOLUTIONS' Matara branch. By implementing **redundancy, VLAN segmentation, and strong security mechanisms**, the network will support seamless operations while allowing future expansion. 🚀
+
+---

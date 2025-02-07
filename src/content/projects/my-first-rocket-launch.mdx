@@ -1,0 +1,185 @@
+---
+title: 'project outlines the network infrastructure design'
+date: '2025-01-02'
+description: 'test'
+cover: "./123.jpg"
+tags: ['project']
+---
+
+# 🌐 \*\*Network Architecture Design for SYNTAX SOLUTIONS 🏢
+
+## **Project Title**
+
+**Secure and Scalable Network Design for SYNTAX SOLUTIONS** 🔒📈
+
+## **Company Overview**
+
+**SYNTAX SOLUTIONS** is a premier privately-owned software company based in **Colombo**. With its recent expansion, the company has acquired a **three-story building in Matara** 🏢, aiming to establish a **cutting-edge software development hub**. The Matara branch will house approximately **150 employees** across various departments, fostering innovation and collaboration.
+
+---
+
+## **Network Design Requirements & Specifications**
+
+### **Departmental Structure & User Distribution**
+
+| **Department**       | **Number of Users**       |
+| -------------------- | ------------------------- |
+| Customer Support     | 10                        |
+| Sales & Marketing    | 20                        |
+| Finance              | 25                        |
+| Legal                | 5                         |
+| Human Resources (HR) | 10                        |
+| Software Developers  | 55                        |
+| Network Team         | 5                         |
+| Server Room          | Servers + ISP Connections |
+
+---
+
+### **Key Network Requirements**
+
+1. **Subnet Isolation**
+
+   - Each department must operate within its own subnet.
+   - Inter-department communication should be restricted unless explicitly required. 🚧
+
+2. **IP Addressing**
+
+   - Use the **192.168.10.0/24** network for all departments except the server room.
+   - Implement **DHCP** for dynamic IP allocation. 📡
+
+3. **Server Room Subnet**
+
+   - Assign static IPs from the **10.254.1.0/24** subnet for servers and critical devices. 💻
+
+4. **Enterprise Applications**
+
+   - Host **ERP** and **CRM** systems on local servers for seamless operations. 🖥️
+
+5. **Redundancy & Reliability**
+
+   - Ensure high availability with redundant systems to eliminate single points of failure. 🔄
+
+6. **Wireless Connectivity**
+
+   - Provide **Wi-Fi access** for the Sales & Marketing team to access internal resources. 📶
+
+7. **Network Monitoring & Troubleshooting**
+
+   - Deploy advanced tools for real-time monitoring and diagnostics. 🛠️
+
+8. **Security Measures**
+   - Implement robust security protocols to safeguard against cyber threats. 🛡️
+
+---
+
+## **Proposed Network Architecture & Topology**
+
+### **Topology Design**
+
+The network will adopt a **Hybrid Topology**, combining **Star** and **Mesh** topologies to achieve:
+
+- **Centralized management** for efficient control. 🎯
+- **Redundant pathways** to ensure uninterrupted connectivity. 🔄
+- **VLAN segmentation** for enhanced security and streamlined traffic management. 🚧
+
+---
+
+### **IP Addressing Plan**
+
+| **Department**    | **Subnet Allocation** | **IP Assignment** |
+| ----------------- | --------------------- | ----------------- |
+| Customer Support  | 192.168.10.0/26       | DHCP              |
+| Sales & Marketing | 192.168.10.64/26      | DHCP + WiFi       |
+| Finance           | 192.168.10.128/26     | DHCP              |
+| Legal             | 192.168.10.192/27     | DHCP              |
+| HR                | 192.168.10.224/27     | DHCP              |
+| Developers        | 192.168.10.96/25      | DHCP              |
+| Network Team      | 192.168.10.160/27     | DHCP              |
+| Server Room       | 10.254.1.0/24         | Static            |
+
+- **DHCP Servers** Dynamically assign IPs to all departments. 📡
+- **Static IPs** Reserved for servers, routers, switches, and critical devices. 💻
+
+---
+
+### ** Network Hardware & Infrastructure**
+
+**Core Networking Devices**
+
+- **Cisco Layer 3 Managed Switches** 🖧
+- **Enterprise-Grade Routers** 🌐
+- **Wireless Access Points** (for Sales & Marketing) 📶
+- **Dual ISP Connections** for redundancy 🔄
+
+**Security & Monitoring Tools**
+
+- **Next-Generation Firewalls (NGFW)** 🔥
+- **Intrusion Detection & Prevention Systems (IDPS)** 🚨
+- **VPN** for secure remote access 🔒
+- **SIEM System** for comprehensive monitoring 📊
+
+---
+
+## **Implementation Strategy**
+
+### **Infrastructure Setup**
+
+- Deploy and configure core devices (routers, switches, firewalls). 🛠️
+- Install structured cabling (Cat6 Ethernet and fiber backbone). 🖧
+- Set up **Wireless Access Points** for the Sales & Marketing team. 📶
+
+### **Network Configuration**
+
+- Create **VLANs** for each department to ensure isolation. 🚧
+- Configure **DHCP** for automatic IP allocation. 📡
+- Establish redundant paths to prevent network bottlenecks. 🔄
+
+### **Server & Security Deployment**
+
+- Install and configure **ERP** and **CRM** servers in the server room. 🖥️
+- Apply **firewall rules** and security policies to protect the network. 🔥
+- Set up **monitoring tools** for real-time alerts and diagnostics. 🚨
+
+### **Testing & Optimization**
+
+- Conduct performance tests to validate network stability. 🧪
+- Implement **QoS policies** to prioritize critical applications. 🎯
+- Document the network design, policies, and troubleshooting procedures. 📄
+
+---
+
+## **Security & Redundancy Measures**
+
+### **Security Implementations**
+
+- ✔ **Firewall Rules** to control inter-department traffic. 🔥
+- ✔ **Access Control Lists (ACLs)** for granular access management. 🛡️
+- ✔ **Intrusion Prevention System (IPS)** to block potential threats. 🚨
+- ✔ **VPN** for secure remote access to the network. 🔒
+- ✔ **Endpoint Security** to protect all workstations. 💻
+- ✔ **Regular Security Audits** and patch updates. 🔄
+
+### **Redundancy Solutions**
+
+- ✔ **Dual ISP Connections** for uninterrupted internet access. 🌐
+- ✔ **Backup Power Systems** (UPS and generators) to prevent downtime. 🔋
+- ✔ **Link Aggregation** for high-speed, fault-tolerant connections. 🖧
+- ✔ **Failover Configurations** to ensure seamless operations. 🔄
+- ✔ **Data Backups** (cloud and on-premise) for disaster recovery. ☁️
+
+---
+
+## **Final Recommendations & Future Expansion**
+
+- Adopt **cloud-based backups** for ERP and CRM systems to enhance data security. ☁️
+- Integrate **AI-driven network monitoring** for predictive maintenance and analysis. 🤖
+- Design the network with **scalability** in mind to accommodate future growth. 📈
+- Regularly update **security policies** to address emerging threats. 🔄
+
+---
+
+## **Conclusion**
+
+The proposed network architecture for SYNTAX SOLUTIONS' Matara branch delivers a **secure, reliable, and scalable infrastructure**. By incorporating **redundancy, VLAN segmentation, and advanced security measures**, the network is poised to support seamless operations and future expansion. 🚀
+
+---
